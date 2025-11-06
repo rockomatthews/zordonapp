@@ -1,0 +1,502 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F4145DAF2EBC2EFE00C5A4D7 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DAB2EBC2EFE00C5A4D7 /* Config.swift */; };
+		F4145DB02EBC2EFE00C5A4D7 /* Telemetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DAD2EBC2EFE00C5A4D7 /* Telemetry.swift */; };
+		F4145DB32EBC2F3300C5A4D7 /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DB12EBC2F3300C5A4D7 /* Controls.swift */; };
+		F4145DB62EBC2F4C00C5A4D7 /* ZordonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DB42EBC2F4C00C5A4D7 /* ZordonApp.swift */; };
+		F4145DC62EBC2F8600C5A4D7 /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DC12EBC2F8600C5A4D7 /* SendView.swift */; };
+		F4145DC72EBC2F8600C5A4D7 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DBB2EBC2F8600C5A4D7 /* HomeView.swift */; };
+		F4145DC82EBC2F8600C5A4D7 /* AssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DB92EBC2F8600C5A4D7 /* AssistantView.swift */; };
+		F4145DC92EBC2F8600C5A4D7 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DB72EBC2F8600C5A4D7 /* ActivityView.swift */; };
+		F4145DCA2EBC2F8600C5A4D7 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DBD2EBC2F8600C5A4D7 /* SignInView.swift */; };
+		F4145DCB2EBC2F8600C5A4D7 /* ReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DBF2EBC2F8600C5A4D7 /* ReceiveView.swift */; };
+		F4145DCC2EBC2F8600C5A4D7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DC32EBC2F8600C5A4D7 /* SettingsView.swift */; };
+		F4145DD32EBC303B00C5A4D7 /* QuoteEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DCF2EBC303B00C5A4D7 /* QuoteEngine.swift */; };
+		F4145DD42EBC303B00C5A4D7 /* IntentsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DCE2EBC303B00C5A4D7 /* IntentsService.swift */; };
+		F4145DD52EBC303B00C5A4D7 /* ZcashService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DD12EBC303B00C5A4D7 /* ZcashService.swift */; };
+		F4145DD62EBC303B00C5A4D7 /* UniversalLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DD02EBC303B00C5A4D7 /* UniversalLink.swift */; };
+		F4145DD72EBC303B00C5A4D7 /* FastAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DCD2EBC303B00C5A4D7 /* FastAuthService.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F4145DAB2EBC2EFE00C5A4D7 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		F4145DAD2EBC2EFE00C5A4D7 /* Telemetry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Telemetry.swift; sourceTree = "<group>"; };
+		F4145DB12EBC2F3300C5A4D7 /* Controls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
+		F4145DB42EBC2F4C00C5A4D7 /* ZordonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZordonApp.swift; sourceTree = "<group>"; };
+		F4145DB72EBC2F8600C5A4D7 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		F4145DB92EBC2F8600C5A4D7 /* AssistantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantView.swift; sourceTree = "<group>"; };
+		F4145DBB2EBC2F8600C5A4D7 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		F4145DBD2EBC2F8600C5A4D7 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		F4145DBF2EBC2F8600C5A4D7 /* ReceiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveView.swift; sourceTree = "<group>"; };
+		F4145DC12EBC2F8600C5A4D7 /* SendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendView.swift; sourceTree = "<group>"; };
+		F4145DC32EBC2F8600C5A4D7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		F4145DCD2EBC303B00C5A4D7 /* FastAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastAuthService.swift; sourceTree = "<group>"; };
+		F4145DCE2EBC303B00C5A4D7 /* IntentsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentsService.swift; sourceTree = "<group>"; };
+		F4145DCF2EBC303B00C5A4D7 /* QuoteEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteEngine.swift; sourceTree = "<group>"; };
+		F4145DD02EBC303B00C5A4D7 /* UniversalLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalLink.swift; sourceTree = "<group>"; };
+		F4145DD12EBC303B00C5A4D7 /* ZcashService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZcashService.swift; sourceTree = "<group>"; };
+		F4EF86882EBBE900002CFEEA /* Zordon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zordon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F4EF86852EBBE900002CFEEA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F4145DAC2EBC2EFE00C5A4D7 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				F4145DAB2EBC2EFE00C5A4D7 /* Config.swift */,
+			);
+			name = Config;
+			path = ../Config;
+			sourceTree = SOURCE_ROOT;
+		};
+		F4145DAE2EBC2EFE00C5A4D7 /* Telemetry */ = {
+			isa = PBXGroup;
+			children = (
+				F4145DAD2EBC2EFE00C5A4D7 /* Telemetry.swift */,
+			);
+			name = Telemetry;
+			path = ../Telemetry;
+			sourceTree = SOURCE_ROOT;
+		};
+		F4145DB22EBC2F3300C5A4D7 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				F4145DB12EBC2F3300C5A4D7 /* Controls.swift */,
+			);
+			name = DesignSystem;
+			path = ../DesignSystem;
+			sourceTree = SOURCE_ROOT;
+		};
+		F4145DB52EBC2F4C00C5A4D7 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F4145DB42EBC2F4C00C5A4D7 /* ZordonApp.swift */,
+			);
+			name = App;
+			path = ../App;
+			sourceTree = SOURCE_ROOT;
+		};
+		F4145DB82EBC2F8600C5A4D7 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				F4145DB72EBC2F8600C5A4D7 /* ActivityView.swift */,
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
+		F4145DBA2EBC2F8600C5A4D7 /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				F4145DB92EBC2F8600C5A4D7 /* AssistantView.swift */,
+			);
+			path = Help;
+			sourceTree = "<group>";
+		};
+		F4145DBC2EBC2F8600C5A4D7 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				F4145DBB2EBC2F8600C5A4D7 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		F4145DBE2EBC2F8600C5A4D7 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				F4145DBD2EBC2F8600C5A4D7 /* SignInView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		F4145DC02EBC2F8600C5A4D7 /* Receive */ = {
+			isa = PBXGroup;
+			children = (
+				F4145DBF2EBC2F8600C5A4D7 /* ReceiveView.swift */,
+			);
+			path = Receive;
+			sourceTree = "<group>";
+		};
+		F4145DC22EBC2F8600C5A4D7 /* Send */ = {
+			isa = PBXGroup;
+			children = (
+				F4145DC12EBC2F8600C5A4D7 /* SendView.swift */,
+			);
+			path = Send;
+			sourceTree = "<group>";
+		};
+		F4145DC42EBC2F8600C5A4D7 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				F4145DC32EBC2F8600C5A4D7 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		F4145DC52EBC2F8600C5A4D7 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				F4145DB82EBC2F8600C5A4D7 /* Activity */,
+				F4145DBA2EBC2F8600C5A4D7 /* Help */,
+				F4145DBC2EBC2F8600C5A4D7 /* Home */,
+				F4145DBE2EBC2F8600C5A4D7 /* Onboarding */,
+				F4145DC02EBC2F8600C5A4D7 /* Receive */,
+				F4145DC22EBC2F8600C5A4D7 /* Send */,
+				F4145DC42EBC2F8600C5A4D7 /* Settings */,
+			);
+			name = Features;
+			path = ../Features;
+			sourceTree = SOURCE_ROOT;
+		};
+		F4145DD22EBC303B00C5A4D7 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F4145DCD2EBC303B00C5A4D7 /* FastAuthService.swift */,
+				F4145DCE2EBC303B00C5A4D7 /* IntentsService.swift */,
+				F4145DCF2EBC303B00C5A4D7 /* QuoteEngine.swift */,
+				F4145DD02EBC303B00C5A4D7 /* UniversalLink.swift */,
+				F4145DD12EBC303B00C5A4D7 /* ZcashService.swift */,
+			);
+			name = Services;
+			path = ../Services;
+			sourceTree = SOURCE_ROOT;
+		};
+		F4EF867F2EBBE900002CFEEA = {
+			isa = PBXGroup;
+			children = (
+				F4145DD22EBC303B00C5A4D7 /* Services */,
+				F4145DC52EBC2F8600C5A4D7 /* Features */,
+				F4145DB52EBC2F4C00C5A4D7 /* App */,
+				F4145DAC2EBC2EFE00C5A4D7 /* Config */,
+				F4145DAE2EBC2EFE00C5A4D7 /* Telemetry */,
+				F4EF86892EBBE900002CFEEA /* Products */,
+				F4145DB22EBC2F3300C5A4D7 /* DesignSystem */,
+			);
+			sourceTree = "<group>";
+		};
+		F4EF86892EBBE900002CFEEA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F4EF86882EBBE900002CFEEA /* Zordon.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F4EF86872EBBE900002CFEEA /* Zordon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F4EF86932EBBE903002CFEEA /* Build configuration list for PBXNativeTarget "Zordon" */;
+			buildPhases = (
+				F4EF86842EBBE900002CFEEA /* Sources */,
+				F4EF86852EBBE900002CFEEA /* Frameworks */,
+				F4EF86862EBBE900002CFEEA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Zordon;
+			packageProductDependencies = (
+			);
+			productName = Zordon;
+			productReference = F4EF86882EBBE900002CFEEA /* Zordon.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F4EF86802EBBE900002CFEEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2610;
+				LastUpgradeCheck = 2610;
+				TargetAttributes = {
+					F4EF86872EBBE900002CFEEA = {
+						CreatedOnToolsVersion = 26.1;
+					};
+				};
+			};
+			buildConfigurationList = F4EF86832EBBE900002CFEEA /* Build configuration list for PBXProject "Zordon" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F4EF867F2EBBE900002CFEEA;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = F4EF86892EBBE900002CFEEA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F4EF86872EBBE900002CFEEA /* Zordon */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F4EF86862EBBE900002CFEEA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F4EF86842EBBE900002CFEEA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4145DAF2EBC2EFE00C5A4D7 /* Config.swift in Sources */,
+				F4145DB32EBC2F3300C5A4D7 /* Controls.swift in Sources */,
+				F4145DB02EBC2EFE00C5A4D7 /* Telemetry.swift in Sources */,
+				F4145DB62EBC2F4C00C5A4D7 /* ZordonApp.swift in Sources */,
+				F4145DC62EBC2F8600C5A4D7 /* SendView.swift in Sources */,
+				F4145DC72EBC2F8600C5A4D7 /* HomeView.swift in Sources */,
+				F4145DD32EBC303B00C5A4D7 /* QuoteEngine.swift in Sources */,
+				F4145DD42EBC303B00C5A4D7 /* IntentsService.swift in Sources */,
+				F4145DD52EBC303B00C5A4D7 /* ZcashService.swift in Sources */,
+				F4145DD62EBC303B00C5A4D7 /* UniversalLink.swift in Sources */,
+				F4145DD72EBC303B00C5A4D7 /* FastAuthService.swift in Sources */,
+				F4145DC82EBC2F8600C5A4D7 /* AssistantView.swift in Sources */,
+				F4145DC92EBC2F8600C5A4D7 /* ActivityView.swift in Sources */,
+				F4145DCA2EBC2F8600C5A4D7 /* SignInView.swift in Sources */,
+				F4145DCB2EBC2F8600C5A4D7 /* ReceiveView.swift in Sources */,
+				F4145DCC2EBC2F8600C5A4D7 /* SettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F4EF86912EBBE903002CFEEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 65NM66P7KX;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F4EF86922EBBE903002CFEEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 65NM66P7KX;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F4EF86942EBBE903002CFEEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 65NM66P7KX;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = hello.Zordon;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F4EF86952EBBE903002CFEEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 65NM66P7KX;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = hello.Zordon;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F4EF86832EBBE900002CFEEA /* Build configuration list for PBXProject "Zordon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4EF86912EBBE903002CFEEA /* Debug */,
+				F4EF86922EBBE903002CFEEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F4EF86932EBBE903002CFEEA /* Build configuration list for PBXNativeTarget "Zordon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4EF86942EBBE903002CFEEA /* Debug */,
+				F4EF86952EBBE903002CFEEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F4EF86802EBBE900002CFEEA /* Project object */;
+}
