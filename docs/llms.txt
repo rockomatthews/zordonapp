@@ -1,0 +1,22 @@
+# Zordon Wallet
+
+> Zordon is an iOS Zcash wallet that holds only ZEC, onboards via NEAR FastAuth, and uses NEAR Intents for non‑custodial cross‑chain receive and pay. It guides users with a concise in‑app assistant sourced from curated docs.
+
+Zordon prioritizes privacy and non‑custodial routes. When a trustless route to ZEC is unavailable, the app refuses the swap and explains alternatives.
+
+## NEAR
+- [FastAuth overview](https://docs.near.org/bos/components/fastauth/overview): Email/OTP and passkeys for web2-friendly onboarding
+- [NEAR Intents](https://docs.near.org/build/intents): Cross‑chain intents and executors for non‑custodial routing
+
+## Zcash
+- [ECC Zcash iOS SDK](https://github.com/zcash/ZcashLightClientKit): Light client, shielded sync, and unified addresses
+- [Zcash protocol spec](https://zips.z.cash/protocol/protocol.pdf): Protocol details and shielded pools
+
+## Project
+- [Routing coverage](./routing.md): Non‑custodial route policy and current coverage matrix
+- [Plan](../z.plan.md): High‑level architecture and milestones
+
+## Optional
+- [NEAR Rust SDK](https://github.com/near/near-sdk-rs): For the optional intent-router contract
+- [llms.txt spec](https://llmstxt.org/): Format used to power the in‑app assistant
+

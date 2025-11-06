@@ -1,0 +1,17 @@
+# Xcode
+**/xcuserdata/
+**/DerivedData/
+*.xcscmblueprint
+*.xccheckout
+
+# SwiftPM
+.swiftpm/
+.build/
+
+# CocoaPods/Carthage (if added later)
+Pods/
+Carthage/
+Cartfile.resolved
+
+# macOS
+.DS_Store
