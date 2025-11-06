@@ -10,7 +10,6 @@ struct ActivityView: View {
         }
         .scrollContentBackground(.hidden)
         .zScreenBackground()
-        .navigationTitle("Activity")
     }
 }
 

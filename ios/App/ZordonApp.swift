@@ -12,7 +12,7 @@ struct ZordonApp: App {
                 if appModel.isSignedIn {
                     HomeView()
                 } else {
-                    NavigationStack { SignInView() }
+                    NavigationStack { SelfCustodyOnboardingView() }
                 }
             }
             .environmentObject(appModel)
@@ -25,7 +25,8 @@ final class AppModel: ObservableObject {
     @Published var zecBalance: Decimal = 0
 
     let zcash = ZcashService()
-    let fastAuth = FastAuthService()
+    let env = EnvironmentService()
+    let pricing = PricingService()
 
     init() {
         Task { await setup() }
@@ -33,7 +34,7 @@ final class AppModel: ObservableObject {
 
     private func setup() async {
         do {
-            try await zcash.configure(lightwalletdURL: AppConfig.defaultLightwalletd)
+            try await zcash.configure(lightwalletdURL: env.lightwalletdURL)
             await zcash.startSync()
             await MainActor.run { self.zecBalance = zcash.latestBalanceZEC }
         } catch {

@@ -8,7 +8,7 @@ struct ReceiveView: View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Receive")
                 .font(.title).bold()
-                .foregroundStyle(ZTheme.Colors.text)
+                .foregroundStyle(Color("AccentColor"))
             Text("Share your universal link or Zcash Unified Address to receive funds. Non‑custodial routes only.")
                 .font(.footnote)
                 .foregroundStyle(ZTheme.Colors.textSecondary)
