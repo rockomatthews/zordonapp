@@ -10,11 +10,9 @@ final class EnvironmentService: ObservableObject {
     }
 
     init() {
-        if let raw = UserDefaults.standard.string(forKey: key), let n = Network(rawValue: raw) {
-            network = n
-        } else {
-            network = .testnet
-        }
+        // Force mainnet regardless of any prior persisted value.
+        network = .mainnet
+        UserDefaults.standard.set(network.rawValue, forKey: key)
     }
 
     var lightwalletdURL: URL {

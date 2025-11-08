@@ -49,6 +49,7 @@ struct SelfCustodyOnboardingView: View {
     private func create() async {
         do {
             let seed = seedWords.joined(separator: " ")
+            // In production, replace with BIP39 validation/derivation and persist keys.
             try KeychainService.saveSecret(Data(seed.utf8), account: "primary", requireBiometrics: requireBiometrics)
             await MainActor.run { appModel.isSignedIn = true }
         } catch {

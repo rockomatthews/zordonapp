@@ -30,6 +30,11 @@
 		F4145DEC2EBD1F2000C5A4D7 /* PayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DEA2EBD1F2000C5A4D7 /* PayView.swift */; };
 		F4145DEF2EBD1F4900C5A4D7 /* SwapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DED2EBD1F4900C5A4D7 /* SwapView.swift */; };
 		F4145DF32EBD27AC00C5A4D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4145DF22EBD27AC00C5A4D7 /* Assets.xcassets */; };
+		F4145DF62EBD490400C5A4D7 /* ZcashLightClientKit in Frameworks */ = {isa = PBXBuildFile; productRef = F4145DF52EBD490400C5A4D7 /* ZcashLightClientKit */; };
+		F4145DF92EBE7EBD00C5A4D7 /* SeedExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DF82EBE7EBD00C5A4D7 /* SeedExportView.swift */; };
+		F4145DFA2EBE7EBD00C5A4D7 /* ContactsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DF72EBE7EBD00C5A4D7 /* ContactsListView.swift */; };
+		F4145DFD2EBE86FC00C5A4D7 /* ContactStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DFB2EBE86FC00C5A4D7 /* ContactStore.swift */; };
+		F4145DFE2EBE86FC00C5A4D7 /* ParamsDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DFC2EBE86FC00C5A4D7 /* ParamsDownloader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +61,10 @@
 		F4145DEA2EBD1F2000C5A4D7 /* PayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayView.swift; sourceTree = "<group>"; };
 		F4145DED2EBD1F4900C5A4D7 /* SwapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapView.swift; sourceTree = "<group>"; };
 		F4145DF22EBD27AC00C5A4D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F4145DF72EBE7EBD00C5A4D7 /* ContactsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListView.swift; sourceTree = "<group>"; };
+		F4145DF82EBE7EBD00C5A4D7 /* SeedExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedExportView.swift; sourceTree = "<group>"; };
+		F4145DFB2EBE86FC00C5A4D7 /* ContactStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactStore.swift; sourceTree = "<group>"; };
+		F4145DFC2EBE86FC00C5A4D7 /* ParamsDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamsDownloader.swift; sourceTree = "<group>"; };
 		F4EF86882EBBE900002CFEEA /* Zordon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zordon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -64,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4145DF62EBD490400C5A4D7 /* ZcashLightClientKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +168,8 @@
 		F4145DC42EBC2F8600C5A4D7 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				F4145DF72EBE7EBD00C5A4D7 /* ContactsListView.swift */,
+				F4145DF82EBE7EBD00C5A4D7 /* SeedExportView.swift */,
 				F4145DC32EBC2F8600C5A4D7 /* SettingsView.swift */,
 			);
 			path = Settings;
@@ -183,6 +195,8 @@
 		F4145DD22EBC303B00C5A4D7 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				F4145DFB2EBE86FC00C5A4D7 /* ContactStore.swift */,
+				F4145DFC2EBE86FC00C5A4D7 /* ParamsDownloader.swift */,
 				F4145DE82EBD1EF100C5A4D7 /* KeychainService.swift */,
 				F4145DE62EBD1EDF00C5A4D7 /* PricingService.swift */,
 				F4145DE42EBD1EC500C5A4D7 /* EnvironmentService.swift */,
@@ -251,6 +265,7 @@
 			);
 			name = Zordon;
 			packageProductDependencies = (
+				F4145DF52EBD490400C5A4D7 /* ZcashLightClientKit */,
 			);
 			productName = Zordon;
 			productReference = F4EF86882EBBE900002CFEEA /* Zordon.app */;
@@ -280,6 +295,9 @@
 			);
 			mainGroup = F4EF867F2EBBE900002CFEEA;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F4145DF42EBD490400C5A4D7 /* XCRemoteSwiftPackageReference "ZcashLightClientKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F4EF86892EBBE900002CFEEA /* Products */;
 			projectDirPath = "";
@@ -315,12 +333,16 @@
 				F4145DE52EBD1EC500C5A4D7 /* EnvironmentService.swift in Sources */,
 				F4145DC72EBC2F8600C5A4D7 /* HomeView.swift in Sources */,
 				F4145DD32EBC303B00C5A4D7 /* QuoteEngine.swift in Sources */,
+				F4145DF92EBE7EBD00C5A4D7 /* SeedExportView.swift in Sources */,
+				F4145DFA2EBE7EBD00C5A4D7 /* ContactsListView.swift in Sources */,
 				F4145DE72EBD1EDF00C5A4D7 /* PricingService.swift in Sources */,
 				F4145DD42EBC303B00C5A4D7 /* IntentsService.swift in Sources */,
 				F4145DEF2EBD1F4900C5A4D7 /* SwapView.swift in Sources */,
 				F4145DD52EBC303B00C5A4D7 /* ZcashService.swift in Sources */,
 				F4145DD62EBC303B00C5A4D7 /* UniversalLink.swift in Sources */,
 				F4145DD72EBC303B00C5A4D7 /* FastAuthService.swift in Sources */,
+				F4145DFD2EBE86FC00C5A4D7 /* ContactStore.swift in Sources */,
+				F4145DFE2EBE86FC00C5A4D7 /* ParamsDownloader.swift in Sources */,
 				F4145DE92EBD1EF100C5A4D7 /* KeychainService.swift in Sources */,
 				F4145DC82EBC2F8600C5A4D7 /* AssistantView.swift in Sources */,
 				F4145DC92EBC2F8600C5A4D7 /* ActivityView.swift in Sources */,
@@ -475,6 +497,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-D ZORDON_ZCASH_SDK";
 				PRODUCT_BUNDLE_IDENTIFIER = hello.Zordon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -507,6 +530,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-D ZORDON_ZCASH_SDK";
 				PRODUCT_BUNDLE_IDENTIFIER = hello.Zordon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -541,6 +565,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F4145DF42EBD490400C5A4D7 /* XCRemoteSwiftPackageReference "ZcashLightClientKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/zcash/ZcashLightClientKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F4145DF52EBD490400C5A4D7 /* ZcashLightClientKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4145DF42EBD490400C5A4D7 /* XCRemoteSwiftPackageReference "ZcashLightClientKit" */;
+			productName = ZcashLightClientKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F4EF86802EBBE900002CFEEA /* Project object */;
 }

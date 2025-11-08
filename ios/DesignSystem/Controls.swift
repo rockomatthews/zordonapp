@@ -58,6 +58,7 @@ extension View {
     func zOutlined() -> some View {
         self
             .padding(8)
+            .background(Color.white)
             .overlay(Rectangle().stroke(ZTheme.Colors.text, lineWidth: 1))
     }
 }

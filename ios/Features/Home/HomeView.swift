@@ -8,6 +8,9 @@ struct HomeView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
+                    // Sync banner
+                    SyncBanner(status: appModel.zcash.syncStatus)
+
                     // Top row: short address and settings gear without backgrounds
                     HStack {
                         let ua = appModel.zcash.unifiedAddress?.encoded ?? "ua1…"
@@ -64,6 +67,31 @@ struct HomeView: View {
             .toolbar { }
             .task { await appModel.pricing.refresh() }
         }
+    }
+}
+
+// Fallback-local banner so build doesn't depend on target membership of other files
+private struct SyncBanner: View {
+    let status: ZcashSyncStatus
+    var body: some View {
+        switch status {
+        case .idle: EmptyView()
+        case .syncing(let p):
+            banner(text: "Syncing \(Int(p*100))%…")
+        case .upToDate:
+            banner(text: "Up to date")
+        case .error(let msg):
+            banner(text: "Sync error: \(msg)")
+        }
+    }
+    private func banner(text: String) -> some View {
+        Text(text)
+            .font(.footnote)
+            .foregroundStyle(ZTheme.Colors.text)
+            .padding(8)
+            .frame(maxWidth: .infinity)
+            .background(Rectangle().fill(ZTheme.Colors.surface))
+            .overlay(Rectangle().stroke(ZTheme.Colors.text, lineWidth: 1))
     }
 }
 

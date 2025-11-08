@@ -1,11 +1,17 @@
 import SwiftUI
 
 struct ActivityView: View {
+    @EnvironmentObject private var appModel: AppModel
     var body: some View {
         List {
             Section("Recent") {
-                Text("Shielded receive 0.5 ZEC – confirmed").foregroundStyle(ZTheme.Colors.text)
-                Text("Intent: ZEC → NEAR – pending").foregroundStyle(ZTheme.Colors.text)
+                ForEach(appModel.zcash.recentTransactions) { tx in
+                    HStack {
+                        Text(tx.isIncoming ? "Receive" : "Send")
+                        Spacer()
+                        Text("\(tx.isIncoming ? "+" : "-")\(tx.amount.description) ZEC")
+                    }.foregroundStyle(ZTheme.Colors.text)
+                }
             }
         }
         .scrollContentBackground(.hidden)
