@@ -12,7 +12,7 @@ struct ZordonApp: App {
                 if appModel.isSignedIn {
                     HomeView()
                 } else {
-                    NavigationStack { SelfCustodyOnboardingView() }
+                    NavigationStack { WelcomeView() }
                 }
             }
             .environmentObject(appModel)

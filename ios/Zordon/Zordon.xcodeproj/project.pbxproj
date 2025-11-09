@@ -35,6 +35,9 @@
 		F4145DFA2EBE7EBD00C5A4D7 /* ContactsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DF72EBE7EBD00C5A4D7 /* ContactsListView.swift */; };
 		F4145DFD2EBE86FC00C5A4D7 /* ContactStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DFB2EBE86FC00C5A4D7 /* ContactStore.swift */; };
 		F4145DFE2EBE86FC00C5A4D7 /* ParamsDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DFC2EBE86FC00C5A4D7 /* ParamsDownloader.swift */; };
+		F4145E022EC015F600C5A4D7 /* RecoverAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145DFF2EC015F600C5A4D7 /* RecoverAccountView.swift */; };
+		F4145E032EC015F600C5A4D7 /* RecoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145E002EC015F600C5A4D7 /* RecoverView.swift */; };
+		F4145E042EC015F600C5A4D7 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4145E012EC015F600C5A4D7 /* WelcomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +68,9 @@
 		F4145DF82EBE7EBD00C5A4D7 /* SeedExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedExportView.swift; sourceTree = "<group>"; };
 		F4145DFB2EBE86FC00C5A4D7 /* ContactStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactStore.swift; sourceTree = "<group>"; };
 		F4145DFC2EBE86FC00C5A4D7 /* ParamsDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamsDownloader.swift; sourceTree = "<group>"; };
+		F4145DFF2EC015F600C5A4D7 /* RecoverAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoverAccountView.swift; sourceTree = "<group>"; };
+		F4145E002EC015F600C5A4D7 /* RecoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoverView.swift; sourceTree = "<group>"; };
+		F4145E012EC015F600C5A4D7 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		F4EF86882EBBE900002CFEEA /* Zordon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zordon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -143,6 +149,9 @@
 		F4145DBE2EBC2F8600C5A4D7 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				F4145DFF2EC015F600C5A4D7 /* RecoverAccountView.swift */,
+				F4145E002EC015F600C5A4D7 /* RecoverView.swift */,
+				F4145E012EC015F600C5A4D7 /* WelcomeView.swift */,
 				F4145DE22EBD1E4D00C5A4D7 /* SelfCustodyOnboardingView.swift */,
 				F4145DBD2EBC2F8600C5A4D7 /* SignInView.swift */,
 			);
@@ -327,6 +336,9 @@
 				F4145DEC2EBD1F2000C5A4D7 /* PayView.swift in Sources */,
 				F4145DAF2EBC2EFE00C5A4D7 /* Config.swift in Sources */,
 				F4145DB32EBC2F3300C5A4D7 /* Controls.swift in Sources */,
+				F4145E022EC015F600C5A4D7 /* RecoverAccountView.swift in Sources */,
+				F4145E032EC015F600C5A4D7 /* RecoverView.swift in Sources */,
+				F4145E042EC015F600C5A4D7 /* WelcomeView.swift in Sources */,
 				F4145DB02EBC2EFE00C5A4D7 /* Telemetry.swift in Sources */,
 				F4145DB62EBC2F4C00C5A4D7 /* ZordonApp.swift in Sources */,
 				F4145DC62EBC2F8600C5A4D7 /* SendView.swift in Sources */,

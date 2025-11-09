@@ -118,15 +118,36 @@ final class ZcashService: ObservableObject, ZcashWalletProviding {
 
             if let data = try KeychainService.loadSecret(account: "primary") {
                 let seed = [UInt8](data)
-                // Estimate wallet birthday height
-                let birthday = synchronizer?.estimateBirthdayHeight(for: Date()) ?? 0
-                _ = try await synchronizer?.prepare(
-                    with: seed,
-                    walletBirthday: birthday,
-                    for: .existingWallet,
-                    name: "default",
-                    keySource: nil
-                )
+                // Decide whether this is a first-time prepare
+                let preparedKey = "zordon.sdk.prepared"
+                let isPrepared = UserDefaults.standard.bool(forKey: preparedKey)
+                let intent: InitializerIntent = isPrepared ? .existingWallet : .newWallet
+                // Use estimated birthday (fallback to 1)
+                let birthday = max(1, synchronizer?.estimateBirthdayHeight(for: Date()) ?? 1)
+                do {
+                    _ = try await synchronizer?.prepare(
+                        with: seed,
+                        walletBirthday: birthday,
+                        for: intent,
+                        name: "default",
+                        keySource: nil
+                    )
+                    if !isPrepared { UserDefaults.standard.set(true, forKey: preparedKey) }
+                } catch {
+                    // If prepare as existing fails (e.g., first run), retry as new wallet once
+                    if intent == .existingWallet {
+                        _ = try await synchronizer?.prepare(
+                            with: seed,
+                            walletBirthday: birthday,
+                            for: .newWallet,
+                            name: "default",
+                            keySource: nil
+                        )
+                        UserDefaults.standard.set(true, forKey: preparedKey)
+                    } else {
+                        throw error
+                    }
+                }
 
                 // Fetch initial addresses and account UUID
                 let accounts = try await synchronizer?.listAccounts() ?? []
@@ -141,7 +162,7 @@ final class ZcashService: ObservableObject, ZcashWalletProviding {
                 }
             }
         } catch {
-            await MainActor.run { self.syncStatus = .error("Init failed") }
+            await MainActor.run { self.syncStatus = .error("Init failed: \(error.localizedDescription)") }
         }
         #else
         unifiedAddress = UnifiedAddress(encoded: "ua1…zordon")
@@ -156,7 +177,7 @@ final class ZcashService: ObservableObject, ZcashWalletProviding {
             await MainActor.run { self.syncStatus = .syncing(progress: 0) }
             // Balance is updated via stateStream sink set up in configure(_:)
         } catch {
-            await MainActor.run { self.syncStatus = .error("Sync failed") }
+            await MainActor.run { self.syncStatus = .error("Sync failed: \(error.localizedDescription)") }
         }
         #else
         syncStatus = .syncing(progress: 0)

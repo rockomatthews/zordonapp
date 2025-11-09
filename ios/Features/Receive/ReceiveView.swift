@@ -13,11 +13,11 @@ struct ReceiveView: View {
                 .font(.footnote)
                 .foregroundStyle(ZTheme.Colors.textSecondary)
 
-            // QR for shielded UA
+            // QR for shielded UA (centered)
             HStack {
                 Spacer()
                 ZStack {
-                    ZQRCodeView(content: appModel.zcash.unifiedAddress?.encoded ?? "loading", size: 220)
+                    ZQRCodeView(content: appModel.zcash.unifiedAddress?.encoded ?? "", size: 220)
                     if appModel.zcash.unifiedAddress == nil {
                         ProgressView()
                     }
@@ -39,8 +39,10 @@ struct ReceiveView: View {
                     }
                 }
                 HStack {
-                    Text(appModel.zcash.unifiedAddress?.encoded ?? "ua1…zordon")
+                    Text(appModel.zcash.unifiedAddress?.encoded ?? "Generating…")
                         .font(.callout).foregroundStyle(ZTheme.Colors.text)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
                         .textSelection(.enabled)
                     Spacer()
                     Button("Copy") { UIPasteboard.general.string = appModel.zcash.unifiedAddress?.encoded }
@@ -54,8 +56,10 @@ struct ReceiveView: View {
             VStack(alignment: .leading, spacing: 10) {
                 Text("Transparent Address").foregroundStyle(ZTheme.Colors.textSecondary)
                 HStack {
-                    Text(appModel.zcash.transparentAddress ?? "t1…zordon")
+                    Text(appModel.zcash.transparentAddress ?? "Generating…")
                         .font(.callout).foregroundStyle(ZTheme.Colors.text)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
                         .textSelection(.enabled)
                     Spacer()
                     Button("Copy") { UIPasteboard.general.string = appModel.zcash.transparentAddress }

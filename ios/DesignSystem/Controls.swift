@@ -32,7 +32,7 @@ enum ZTheme {
 struct ZButtonYellowStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.headline)
+            .font(.title3.weight(.semibold))
             .padding(.vertical, 12)
             .padding(.horizontal, 18)
             .background(

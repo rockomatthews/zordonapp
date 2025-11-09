@@ -1,5 +1,6 @@
 import SwiftUI
 import Combine
+import CryptoKit
 
 struct SelfCustodyOnboardingView: View {
     @EnvironmentObject private var appModel: AppModel
@@ -48,9 +49,15 @@ struct SelfCustodyOnboardingView: View {
 
     private func create() async {
         do {
-            let seed = seedWords.joined(separator: " ")
-            // In production, replace with BIP39 validation/derivation and persist keys.
-            try KeychainService.saveSecret(Data(seed.utf8), account: "primary", requireBiometrics: requireBiometrics)
+            let mnemonic = seedWords.joined(separator: " ")
+            // Derive a deterministic 32-byte seed from the mnemonic using SHA256.
+            // This is a pragmatic stand-in for full BIP39 derivation so the SDK can operate.
+            let hash = SHA256.hash(data: Data(mnemonic.utf8))
+            let seedData = Data(hash)
+            try KeychainService.saveSecret(seedData, account: "primary", requireBiometrics: requireBiometrics)
+            // Reconfigure and start sync now that a seed exists.
+            try await appModel.zcash.configure(lightwalletdURL: appModel.env.lightwalletdURL)
+            await appModel.zcash.startSync()
             await MainActor.run { appModel.isSignedIn = true }
         } catch {
             await MainActor.run { errorMessage = "Failed to save wallet" }
@@ -60,11 +67,10 @@ struct SelfCustodyOnboardingView: View {
 
 enum Mnemonic {
     static func generate() -> [String] {
-        // Simple placeholder 12-word mnemonic (replace with BIP39 in production)
-        let words = ["zebra","quantum","shadow","orchard","ledger","privacy","shield","spark","swift","near","intent","zordon","wallet","secure","yellow","blue","hash","note","block","signal","alpha","beta","gamma","delta"]
-        var result: [String] = []
-        for _ in 0..<12 { result.append(words.randomElement()!) }
-        return result
+        // Placeholder unique 12-word mnemonic (no duplicates). Replace with BIP39 in production.
+        var pool = ["zebra","quantum","shadow","orchard","ledger","privacy","shield","spark","swift","near","intent","zordon","wallet","secure","yellow","blue","hash","note","block","signal","alpha","beta","gamma","delta","sapling","orchard2","halo","blossom","canopy","nu5","light","client","mobile","apple","orange","river","mountain","galaxy","vector","matrix","cipher","random","ocean","forest","nebula","meteor","planet","comet","nova","quartz","ember","onyx","cobalt","silver","gold","violet","indigo","crimson","ivory","amber","jade","pearl"]
+        pool.shuffle()
+        return Array(pool.prefix(12))
     }
 }
 
