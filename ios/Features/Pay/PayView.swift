@@ -2,7 +2,7 @@ import SwiftUI
 
 struct PayView: View {
     @EnvironmentObject private var appModel: AppModel
-    @State private var toChain: String = "NEAR"
+    @State private var toChainId: String = "near"
     @State private var destination: String = ""
     @State private var amountZec: String = ""
     @State private var amountUsd: String = ""
@@ -11,8 +11,8 @@ struct PayView: View {
     @State private var presentReview: Bool = false
     @State private var pendingQuoteId: String? = nil
 
-    private let chains = ["NEAR", "ETH", "BTC", "POL"]
     private let intents = IntentsService()
+    private var chains: [ChainOption] { intents.availableChains() }
 
     var body: some View {
         ScrollView {
@@ -29,9 +29,9 @@ struct PayView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Send to").foregroundStyle(ZTheme.Colors.textSecondary)
                     HStack {
-                        Picker("", selection: $toChain) {
-                            ForEach(chains, id: \.self) { sym in
-                                Text(sym).tag(sym)
+                        Picker("", selection: $toChainId) {
+                            ForEach(chains, id: \.id) { c in
+                                Text(c.symbol).tag(c.id)
                             }
                         }
                         .pickerStyle(.menu)
@@ -100,7 +100,8 @@ struct PayView: View {
     @State private var lastLegs: [RouteLeg]? = nil
     private func getQuote() async {
         do {
-            let req = QuoteRequest(direction: .outbound, sourceChain: "zcash", sourceAsset: "ZEC", destChain: toChain.lowercased(), destAsset: toChain, amount: amountZec.isEmpty ? "0" : amountZec)
+            let selected = chains.first(where: { $0.id == toChainId }) ?? chains.first!
+            let req = QuoteRequest(direction: .outbound, sourceChain: "zcash", sourceAsset: "ZEC", destChain: selected.id, destAsset: selected.symbol, amount: amountZec.isEmpty ? "0" : amountZec)
             let q = try await intents.fetchQuote(req)
             quoteText = "Quote: ~\(q.amountOut) out (slippage \(q.slippageBps) bps)"
             pendingQuoteId = q.quoteId

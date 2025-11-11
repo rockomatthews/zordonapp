@@ -43,8 +43,8 @@ extension RecoverAccountView {
                 await MainActor.run { errorMessage = "Please enter at least 12 words." }
                 return
             }
-            let hash = SHA256.hash(data: Data(trimmed.utf8))
-            let seedData = Data(hash)
+            // Derive a 64-byte seed using SHA512 as a pragmatic stand-in for BIP39 seed.
+            let seedData = Data(SHA512.hash(data: Data(trimmed.utf8)))
             try KeychainService.saveSecret(seedData, account: "primary", requireBiometrics: requireBiometrics)
             try await appModel.zcash.configure(lightwalletdURL: appModel.env.lightwalletdURL)
             await appModel.zcash.startSync()

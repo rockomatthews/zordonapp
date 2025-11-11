@@ -43,15 +43,31 @@ final class ZcashService: ObservableObject, ZcashWalletProviding {
     @Published private(set) var recentTransactions: [TransactionItem] = []
 
     private var endpoint: URL?
+    private var endpointCandidates: [URL] = []
+    private var endpointIndex: Int = 0
     #if ZORDON_ZCASH_SDK
     private var synchronizer: SDKSynchronizer?
     private var zcashNetwork: ZcashNetwork = ZcashNetworkBuilder.network(for: .testnet)
     private var cancellables = Set<AnyCancellable>()
     private var accountUUID: AccountUUID?
+    private var syncWatchdogTask: Task<Void, Never>?
     #endif
 
     func configure(lightwalletdURL: URL) async throws {
         endpoint = lightwalletdURL
+        // Build candidate list (primary first, then fallbacks)
+        if lightwalletdURL.absoluteString.contains("testnet") {
+            endpointCandidates = [lightwalletdURL]
+        } else {
+            endpointCandidates = [
+                lightwalletdURL,
+                URL(string: "https://mainnet.lightwalletd.com:443")!,
+                URL(string: "https://lightwalletd.com:9067")!,
+                URL(string: "https://lightwalletd.com:443")!,
+                URL(string: "https://lwd.nighthawkflutter.com:9067")!
+            ]
+        }
+        endpointIndex = 0
         // Download params if needed and initialize SDK subsystems.
         // Set up callbacks for sync progress to update `syncStatus`.
         #if ZORDON_ZCASH_SDK
@@ -59,29 +75,52 @@ final class ZcashService: ObservableObject, ZcashWalletProviding {
             let isTestnet = lightwalletdURL.absoluteString.contains("testnet")
             zcashNetwork = ZcashNetworkBuilder.network(for: isTestnet ? .testnet : .mainnet)
             let appSupport = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            // File URLs expected by the SDK for cache and data databases
+            let cacheDbURL = appSupport.appendingPathComponent("cache.db", isDirectory: false)
             let fsBlockDbRoot = appSupport.appendingPathComponent("fsblocks", isDirectory: true)
             let generalStorageURL = appSupport.appendingPathComponent("storage", isDirectory: true)
-            let dataDbURL = appSupport.appendingPathComponent("data", isDirectory: true)
+            let dataDbURL = appSupport.appendingPathComponent("data.db", isDirectory: false)
             let torDirURL = appSupport.appendingPathComponent("tor", isDirectory: true)
             try FileManager.default.createDirectory(at: fsBlockDbRoot, withIntermediateDirectories: true)
             try FileManager.default.createDirectory(at: generalStorageURL, withIntermediateDirectories: true)
-            try FileManager.default.createDirectory(at: dataDbURL, withIntermediateDirectories: true)
             try FileManager.default.createDirectory(at: torDirURL, withIntermediateDirectories: true)
+            // Ensure empty db files exist (SDK will initialize schema)
+            if !FileManager.default.fileExists(atPath: cacheDbURL.path) {
+                FileManager.default.createFile(atPath: cacheDbURL.path, contents: nil)
+            }
+            if !FileManager.default.fileExists(atPath: dataDbURL.path) {
+                FileManager.default.createFile(atPath: dataDbURL.path, contents: nil)
+            }
 
+            // Use the provided URL; default to lwd port 9067 if not specified
+            let isSecure = (lightwalletdURL.scheme == "https")
+            let port = Int(lightwalletdURL.port ?? 9067)
+            let host = lightwalletdURL.host ?? "lightwalletd"
             let endpoint = LightWalletEndpoint(
-                address: lightwalletdURL.host ?? "lightwalletd",
-                port: Int(lightwalletdURL.port ?? 9067),
-                secure: lightwalletdURL.scheme == "https"
+                address: host,
+                port: port,
+                secure: isSecure
             )
+            print("ZcashService: using LWD endpoint \(host):\(endpoint.port) secure=\(endpoint.secure)")
 
             // Ensure Sapling params exist on disk and pass the file URLs to the initializer
             let paramsDir = try await ParamsDownloader.ensureDownloaded()
             let spendParamsURL = paramsDir.appendingPathComponent("sapling-spend.params")
             let outputParamsURL = paramsDir.appendingPathComponent("sapling-output.params")
+            // Sanity check param files exist and are non-empty
+            func fileSize(_ url: URL) -> Int64 {
+                (try? FileManager.default.attributesOfItem(atPath: url.path)[.size] as? NSNumber)?.int64Value ?? 0
+            }
+            let spendSize = fileSize(spendParamsURL)
+            let outputSize = fileSize(outputParamsURL)
+            if spendSize == 0 || outputSize == 0 {
+                throw NSError(domain: "zordon", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Sapling params missing or empty"])
+            }
+            print("ZcashService: params ok spend=\(spendSize)B output=\(outputSize)B at \(paramsDir.path)")
 
             // Build Initializer per 2.3.7 signature
             let initializer = Initializer(
-                cacheDbURL: nil,
+                cacheDbURL: cacheDbURL,
                 fsBlockDbRoot: fsBlockDbRoot,
                 generalStorageURL: generalStorageURL,
                 dataDbURL: dataDbURL,
@@ -98,6 +137,7 @@ final class ZcashService: ObservableObject, ZcashWalletProviding {
             )
 
             synchronizer = try SDKSynchronizer(initializer: initializer)
+            print("ZcashService: synchronizer created. Network=\(zcashNetwork.networkType)")
 
             // Observe state stream for progress and synced
             synchronizer?.stateStream
@@ -121,21 +161,25 @@ final class ZcashService: ObservableObject, ZcashWalletProviding {
                 // Decide whether this is a first-time prepare
                 let preparedKey = "zordon.sdk.prepared"
                 let isPrepared = UserDefaults.standard.bool(forKey: preparedKey)
-                let intent: InitializerIntent = isPrepared ? .existingWallet : .newWallet
-                // Use estimated birthday (fallback to 1)
-                let birthday = max(1, synchronizer?.estimateBirthdayHeight(for: Date()) ?? 1)
+                // Use estimated birthday; fallback to network Sapling activation height
+                let fallbackBirthday: BlockHeight = (zcashNetwork.networkType == .mainnet) ? 419_200 : 280_000
+                let estimated: BlockHeight = synchronizer?.estimateBirthdayHeight(for: Date()) ?? fallbackBirthday
+                let birthday: BlockHeight = (estimated < fallbackBirthday) ? fallbackBirthday : estimated
+                print("ZcashService: will prepare wallet. isPrepared=\(isPrepared) birthday=\(birthday)")
                 do {
                     _ = try await synchronizer?.prepare(
                         with: seed,
                         walletBirthday: birthday,
-                        for: intent,
+                        for: (isPrepared ? .existingWallet : .newWallet),
                         name: "default",
                         keySource: nil
                     )
                     if !isPrepared { UserDefaults.standard.set(true, forKey: preparedKey) }
+                    print("ZcashService: prepare ok")
                 } catch {
                     // If prepare as existing fails (e.g., first run), retry as new wallet once
-                    if intent == .existingWallet {
+                    if isPrepared {
+                        print("ZcashService: prepare existing failed, retrying as new: \(error)")
                         _ = try await synchronizer?.prepare(
                             with: seed,
                             walletBirthday: birthday,
@@ -144,7 +188,9 @@ final class ZcashService: ObservableObject, ZcashWalletProviding {
                             keySource: nil
                         )
                         UserDefaults.standard.set(true, forKey: preparedKey)
+                        print("ZcashService: prepare new ok")
                     } else {
+                        print("ZcashService: prepare failed: \(error)")
                         throw error
                     }
                 }
@@ -155,14 +201,17 @@ final class ZcashService: ObservableObject, ZcashWalletProviding {
                 if let acc = self.accountUUID {
                     if let ua = try? await synchronizer?.getUnifiedAddress(accountUUID: acc) {
                         await MainActor.run { self.unifiedAddress = UnifiedAddress(encoded: ua.stringEncoded) }
+                        print("ZcashService: UA ready.")
                     }
                     if let t = try? await synchronizer?.getTransparentAddress(accountUUID: acc) {
                         await MainActor.run { self.transparentAddress = t.stringEncoded }
+                        print("ZcashService: t-addr ready.")
                     }
                 }
             }
         } catch {
             await MainActor.run { self.syncStatus = .error("Init failed: \(error.localizedDescription)") }
+            print("ZcashService: init error \(error)")
         }
         #else
         unifiedAddress = UnifiedAddress(encoded: "ua1…zordon")
@@ -176,7 +225,49 @@ final class ZcashService: ObservableObject, ZcashWalletProviding {
             try await synchronizer?.start(retry: true)
             await MainActor.run { self.syncStatus = .syncing(progress: 0) }
             // Balance is updated via stateStream sink set up in configure(_:)
+            // Watchdog: if we stay at 0% for too long, hop to next endpoint
+            syncWatchdogTask?.cancel()
+            syncWatchdogTask = Task.detached { [weak self] in
+                try? await Task.sleep(nanoseconds: 15_000_000_000) // 15s
+                guard let self else { return }
+                let status = await MainActor.run { self.syncStatus }
+                var isStuckAtZero = false
+                if case .syncing(let p) = status { isStuckAtZero = (p <= 0.0) }
+                if isStuckAtZero, self.endpointIndex + 1 < self.endpointCandidates.count {
+                    let next = self.endpointCandidates[self.endpointIndex + 1]
+                    print("ZcashService: watchdog switching to \(next.absoluteString)")
+                    do {
+                        self.endpointIndex += 1
+                        try await self.configure(lightwalletdURL: next)
+                        try await self.synchronizer?.start(retry: true)
+                        await MainActor.run { self.syncStatus = .syncing(progress: 0) }
+                    } catch {
+                        print("ZcashService: watchdog failed to restart \(error)")
+                    }
+                }
+            }
         } catch {
+            let err = "\(error)"
+            print("ZcashService: startSync error \(err)")
+            // If the server validation timed out, try next candidate endpoint once
+            if err.contains("serviceGetInfoFailed") || err.contains("timeOut") {
+                if endpointIndex + 1 < endpointCandidates.count {
+                    endpointIndex += 1
+                    let next = endpointCandidates[endpointIndex]
+                    print("ZcashService: retrying with next endpoint \(next.absoluteString)")
+                    do {
+                        // Stop current synchronizer cleanly before re-initializing
+                        try? await synchronizer?.stop()
+                        synchronizer = nil
+                        try await configure(lightwalletdURL: next)
+                        try await synchronizer?.start(retry: true)
+                        await MainActor.run { self.syncStatus = .syncing(progress: 0) }
+                        return
+                    } catch {
+                        print("ZcashService: retry start failed \(error)")
+                    }
+                }
+            }
             await MainActor.run { self.syncStatus = .error("Sync failed: \(error.localizedDescription)") }
         }
         #else

@@ -29,14 +29,16 @@ final class AppModel: ObservableObject {
     let pricing = PricingService()
 
     init() {
-        Task { await setup() }
+        Task { await setupIfHasWallet() }
     }
 
-    private func setup() async {
+    private func setupIfHasWallet() async {
         do {
-            try await zcash.configure(lightwalletdURL: env.lightwalletdURL)
-            await zcash.startSync()
-            await MainActor.run { self.zecBalance = zcash.latestBalanceZEC }
+            // Only configure/sync automatically if a wallet already exists in Keychain.
+            if let _ = try KeychainService.loadSecret(account: "primary") {
+                // Do not auto-enter the app; require explicit Sign In.
+                // We still prewarm pricing and env, but leave sync to Sign In.
+            }
         } catch {
             // Keep silent here; UI can surface sync errors from service state.
         }

@@ -50,10 +50,8 @@ struct SelfCustodyOnboardingView: View {
     private func create() async {
         do {
             let mnemonic = seedWords.joined(separator: " ")
-            // Derive a deterministic 32-byte seed from the mnemonic using SHA256.
-            // This is a pragmatic stand-in for full BIP39 derivation so the SDK can operate.
-            let hash = SHA256.hash(data: Data(mnemonic.utf8))
-            let seedData = Data(hash)
+            // Derive a 64-byte seed using SHA512 as a pragmatic stand-in for BIP39 seed.
+            let seedData = Data(SHA512.hash(data: Data(mnemonic.utf8)))
             try KeychainService.saveSecret(seedData, account: "primary", requireBiometrics: requireBiometrics)
             // Reconfigure and start sync now that a seed exists.
             try await appModel.zcash.configure(lightwalletdURL: appModel.env.lightwalletdURL)

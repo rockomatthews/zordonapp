@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SwapView: View {
-    @State private var fromChain: String = "POL"
+    @State private var fromChainId: String = "eth"
     @State private var fromAmount: String = ""
     @State private var refundAddress: String = ""
     @State private var toAsset: String = "ZEC"
@@ -11,7 +11,7 @@ struct SwapView: View {
     @State private var pendingQuoteId: String? = nil
 
     private let intents = IntentsService()
-    private var chains: [String] { intents.availableChains().map { $0.symbol } }
+    private var chains: [ChainOption] { intents.availableChains() }
 
     var body: some View {
         ScrollView {
@@ -22,9 +22,9 @@ struct SwapView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("From").foregroundStyle(ZTheme.Colors.textSecondary)
                     HStack {
-                        Picker("Chain", selection: $fromChain) {
-                            ForEach(chains, id: \.self) { sym in
-                                Text(sym).tag(sym)
+                        Picker("Chain", selection: $fromChainId) {
+                            ForEach(chains, id: \.id) { c in
+                                Text(c.symbol).tag(c.id)
                             }
                         }
                         .pickerStyle(.menu)
@@ -92,7 +92,8 @@ struct SwapView: View {
     @State private var lastLegs: [RouteLeg]? = nil
     private func quote() async {
         do {
-            let req = QuoteRequest(direction: .inbound, sourceChain: fromChain.lowercased(), sourceAsset: fromChain, destChain: "zcash", destAsset: toAsset, amount: fromAmount.isEmpty ? "0" : fromAmount)
+            let selected = chains.first(where: { $0.id == fromChainId }) ?? chains.first!
+            let req = QuoteRequest(direction: .inbound, sourceChain: selected.id, sourceAsset: selected.symbol, destChain: "zcash", destAsset: toAsset, amount: fromAmount.isEmpty ? "0" : fromAmount)
             let q = try await intents.fetchQuote(req)
             status = "Quote: out \(q.amountOut) slippage \(q.slippageBps)bps"
             pendingQuoteId = q.quoteId

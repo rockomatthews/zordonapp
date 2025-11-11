@@ -17,8 +17,24 @@ final class EnvironmentService: ObservableObject {
 
     var lightwalletdURL: URL {
         switch network {
+        // Use a known good public endpoint for mainnet
         case .mainnet: return URL(string: "https://mainnet.lightwalletd.com:9067")!
+        // Public ECC testnet endpoint
         case .testnet: return URL(string: "https://lightwalletd.testnet.z.cash:9067")!
+        }
+    }
+
+    // Fallback candidates (first is primary)
+    var lightwalletdCandidates: [URL] {
+        switch network {
+        case .mainnet:
+            return [
+                URL(string: "https://mainnet.lightwalletd.com:9067")!
+            ]
+        case .testnet:
+            return [
+                URL(string: "https://lightwalletd.testnet.z.cash:9067")!
+            ]
         }
     }
 }
